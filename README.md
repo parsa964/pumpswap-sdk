@@ -1,12 +1,17 @@
 # PumpSwap SDK
-# To Get Start
+
+## Contact
+
+If you need help or other bot developing, contact here: [Telegram](https://t.me/shiny0103)  |  [Twitter](https://x.com/0xTan1319)
+
+## To Get Start
 1. `npm i`
 
 2. Paste your private key and Helius RPC key in .env.copy
 
 3. rename it to .env
 
-# Usage
+## Usage
 
 ### buy/sell on PumpSwap
 ```typescript
@@ -41,7 +46,6 @@ async function main() {
 }
 ```
 
-## Discord channel: https://discord.gg/hFhQeBCqWX
 
 
 
