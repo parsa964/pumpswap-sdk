@@ -1,15 +1,20 @@
 # PumpSwap SDK
 
+The **PumpSwap SDK** is a powerful software development kit designed to facilitate interactions with PumpSwap using **Jito**. It provides essential functionality like buying/selling tokens, fetching token prices, and accessing liquidity pools. The SDK is implemented in **TypeScript** and allows seamless integration for developers working with the PumpSwap ecosystem.
+
 ## Contact
 
 If you need help or other bot developing, contact here: [Telegram](https://t.me/shiny0103)  |  [Twitter](https://x.com/0xTan1319)
 
-## To Get Start
-1. `npm i`
+## 📚 Features
 
-2. Paste your private key and Helius RPC key in .env.copy
+- **Buy/Sell Tokens:** Perform token swaps using specific parameters with bundle.
 
-3. rename it to .env
+- **Fetch Token Prices:** Retrieve the current price of tokens with a single function.
+
+- **Access PumpSwap Pools:** Fetch pool details for specific tokens.
+
+- **Customizable Environment:** Easily configure private keys and RPC keys.
 
 ## Usage
 
