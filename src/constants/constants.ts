@@ -23,6 +23,9 @@ export const connection = new Connection(RPC_ENDPOINT, {
  wsEndpoint: RPC_WEBSOCKET_ENDPOINT,
  commitment: COMMITMENT_LEVEL,
 });
+
+console.log(`Using RPC endpoint: ${RPC_ENDPOINT}`);
+
 export const nozomi_connection = new Connection("https://ams1.secure.nozomi.temporal.xyz/?c=YOUR_NOZOMI_API_KEY")
 export const wallet_1 = Keypair.fromSecretKey(bs58.decode(PRIVATE_KEY));
 export const wsol = "So11111111111111111111111111111111111111112"

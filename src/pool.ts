@@ -23,6 +23,7 @@ interface PoolWithPrice extends Pool {
 }
 
 const getPoolsWithBaseMint = async (mintAddress: PublicKey) => {
+    console.log(`Searching for pools with base mint: ${mintAddress.toString()}`);
     const response = await connection.getProgramAccounts(PUMP_AMM_PROGRAM_ID, {
         filters: [
             { "dataSize": 211 },
@@ -35,7 +36,8 @@ const getPoolsWithBaseMint = async (mintAddress: PublicKey) => {
           ]
         }
     )
-
+    console.log(`Found ${response.length} pools with base mint`);
+    
     const mappedPools = response.map((pool) => {
         const data = Buffer.from(pool.account.data);
         const poolData = program.coder.accounts.decode('pool', data);
@@ -50,6 +52,7 @@ const getPoolsWithBaseMint = async (mintAddress: PublicKey) => {
 }
 
 const getPoolsWithQuoteMint = async (mintAddress: PublicKey) => {
+    console.log(`Searching for pools with quote mint: ${mintAddress.toString()}`);
     const response = await connection.getProgramAccounts(PUMP_AMM_PROGRAM_ID, {
         filters: [
             { "dataSize": 211 },
@@ -62,7 +65,8 @@ const getPoolsWithQuoteMint = async (mintAddress: PublicKey) => {
           ]
         }
     )
-
+    console.log(`Found ${response.length} pools with quote mint`);
+    
     const mappedPools = response.map((pool) => {
         const data = Buffer.from(pool.account.data);
         const poolData = program.coder.accounts.decode('pool', data);
@@ -134,8 +138,16 @@ const getPoolsWithPrices = async (mintAddress: PublicKey) => {
     ])
     //const poolsWithBaseMinQuoteWSOL = await getPoolsWithBaseMintQuoteWSOL(mintAddress)
     const pools = [...poolsWithBaseMint, ...poolsWithQuoteMint];
+    
+    console.log(`Found ${pools.length} pools for mint ${mintAddress.toString()}`);
+    
+    if (pools.length === 0) {
+        return [];
+    }
 
     const results = await Promise.all(pools.map(getPriceAndLiquidity));
+    
+    console.log(`Got prices for ${results.length} pools`);
 
     const sortedByHighestLiquidity = results.sort((a, b) => b.reserves.native - a.reserves.native);
 
@@ -166,6 +178,9 @@ export const getPumpSwapPool = async (mint:PublicKey) => {
 
 export const getPrice = async (mint:PublicKey) => {
     const pools = await getPoolsWithPrices(mint)
+    if (!pools || pools.length === 0) {
+        return null; // Return null when no pools are found
+    }
     return pools[0].price;
 }
 async function main(){
